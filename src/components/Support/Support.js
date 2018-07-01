@@ -1,37 +1,37 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import './Feeling.css';
+import './Support.css';
 import { connect } from 'react-redux';
 
 const mapReduxStateToProps = ({reduxStore}) => ({
   reduxStore
 })
 
-class Feeling extends Component {
+class Support extends Component {
   constructor(props){
     super(props);
     this.state = {
-      feeling: ''
+      support: ''
     }
   }
 
   handleSubmit = (event) => {
     event.preventDefault();
-    const action = {type: 'ADD_FEELING', payload: parseInt(this.state.feeling, 10)};
+    const action = {type: 'ADD_SUPPORT', payload: parseInt(this.state.support, 10)};
     this.props.dispatch(action);
-    window.location.href = '#/understanding';
+    window.location.href = '#/comments';
   }
 
   handleChange = (event) => {
     this.setState({
-      feeling: event.target.value
+      support: event.target.value
     })
   }
   
   render() {
     return (
-      <div className="Feeling">
-        <p>How are you feeling today?</p>
+      <div className="support">
+        <p>How well are you being supported?</p>
         <form onSubmit={this.handleSubmit}>
           <input type="text" onChange={this.handleChange} />
           <input type="submit" value="Next"/>
@@ -41,5 +41,5 @@ class Feeling extends Component {
   }
 }
 
-export default connect(mapReduxStateToProps)(Feeling);
+export default connect(mapReduxStateToProps)(Support);
 
