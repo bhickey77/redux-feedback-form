@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import './Feeling.css';
-import { component } from 'react-redux';
+import { connect } from 'react-redux';
 
 const mapReduxStateToProps = reduxState => ({
   reduxState
@@ -14,7 +14,7 @@ class Feeling extends Component {
         <p>How are you feeling today?</p>
         <form onSubmit={this.handleSubmit}>
           <input type="text"/>
-          <input type="submit"/>
+          <input type="submit" value="Next"/>
         </form>
       </div>
     );
