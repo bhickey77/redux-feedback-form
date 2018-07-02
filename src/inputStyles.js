@@ -35,8 +35,8 @@ const styles = {
       margin: '0 auto'
     },
     cardCompleted: {
-      minWidth: 275,
-      width: 200,
+      minWidth: 375,
+      width: 380,
       margin: '0 auto'
     },
 };

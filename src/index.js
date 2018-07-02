@@ -13,30 +13,26 @@ const feedbackReducer = (state = {}, action) => {
                 ...state,
                 feeling: action.payload
             }
-            break;
         case 'ADD_UNDERSTANDING':
             return {
                 ...state,
                 understanding: action.payload
             }
-            break;
         case 'ADD_SUPPORT':
             return {
                 ...state,
                 support: action.payload
             }
-            break;
         case 'ADD_COMMENTS':
             return {
                 ...state,
                 comments: action.payload
             }
-            break;
         case 'NEW_FEEDBACK':
             return {}
-            break;
+        default:
+            return {}
     }
-    return state;
 }
 
 const storeInstance = createStore(

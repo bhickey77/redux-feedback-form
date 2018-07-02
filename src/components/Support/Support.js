@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import './Support.css';
 import { connect } from 'react-redux';
 import { compose } from 'redux';

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import './Feeling.css';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
@@ -31,6 +30,14 @@ class Feeling extends Component {
     }
   }
 
+  handleKeyPress = event => {
+    if(event.key == 'Enter'){
+      console.log(`you pressed the enter key`);
+      
+      this.handleSubmit();
+    }
+  }
+
   componentDidMount(){
     console.log(this.props.reduxStore.feedbackReducer.feeling);
     this.setState({
@@ -39,7 +46,6 @@ class Feeling extends Component {
   }
 
   handleSubmit = (event) => {
-    event.preventDefault();
     const action = {type: 'ADD_FEELING', payload: parseInt(this.state.selectedValue, 10)};
     this.props.dispatch(action);
     window.location.href = '#/understanding';
