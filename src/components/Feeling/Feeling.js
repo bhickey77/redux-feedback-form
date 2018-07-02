@@ -30,10 +30,9 @@ class Feeling extends Component {
     }
   }
 
-  handleKeyPress = event => {
+  onKeyPress = event => {
     if(event.key == 'Enter'){
       console.log(`you pressed the enter key`);
-      
       this.handleSubmit();
     }
   }
@@ -61,7 +60,7 @@ class Feeling extends Component {
     const { classes } = this.props;
 
     return (
-      <div className="Feeling">
+      <div onKeyPress={this.onKeyPress} className="Feeling">
         <div>
           <Card className={classes.card}>
             <CardContent>

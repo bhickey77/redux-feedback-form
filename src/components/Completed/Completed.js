@@ -21,11 +21,18 @@ class Completed extends Component {
     this.props.dispatch({type: 'NEW_FEEDBACK'})
   }
 
+  onKeyPress = event => {
+    if(event.key == 'Enter'){
+      console.log(`you pressed the enter key`);
+      this.handleNewFeedback();
+    }
+  }
+
   render() {
     const { classes } = this.props;
 
     return (
-      <Card className={classes.cardCompleted}>
+      <Card onKeyPress={this.onKeyPress} className={classes.cardCompleted}>
        <CardContent>
           <Typography className={classes.title} color="textPrimary">
           <Icon>done</Icon> Complete! Thank You for Your Feedback!

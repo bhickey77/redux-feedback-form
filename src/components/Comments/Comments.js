@@ -26,6 +26,13 @@ class Comments extends Component {
     }
   }
 
+  onKeyPress = event => {
+    if(event.key == 'Enter'){
+      console.log(`you pressed the enter key`);
+      this.handleSubmit();
+    }
+  }
+
   componentDidMount(){
     console.log(this.props.reduxStore.feedbackReducer.comments);
     this.setState({
@@ -40,7 +47,6 @@ class Comments extends Component {
   }
 
   handleSubmit = async (event) => {
-    event.preventDefault();
     const action = {type: 'ADD_COMMENTS', payload: this.state.comments};
     await this.props.dispatch(action);
     let objectToSend = {
@@ -70,7 +76,7 @@ class Comments extends Component {
     const { classes } = this.props;
 
     return (
-      <div>
+      <div onKeyPress={this.onKeyPress}>
       <div>
         <Card className={classes.card}>
           <CardContent>

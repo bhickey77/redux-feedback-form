@@ -30,6 +30,13 @@ class Support extends Component {
     }
   }
 
+  onKeyPress = event => {
+    if(event.key == 'Enter'){
+      console.log(`you pressed the enter key`);
+      this.handleSubmit();
+    }
+  }
+
   componentDidMount(){
     console.log(this.props.reduxStore.feedbackReducer.support);
     this.setState({
@@ -44,7 +51,6 @@ class Support extends Component {
   }
 
   handleSubmit = (event) => {
-    event.preventDefault();
     const action = {type: 'ADD_SUPPORT', payload: parseInt(this.state.selectedValue, 10)};
     this.props.dispatch(action);
     window.location.href = '#/comments';
@@ -60,7 +66,7 @@ class Support extends Component {
     const { classes } = this.props;
 
     return (
-    <div>
+    <div onKeyPress={this.onKeyPress}>
       <div>
         <Card className={classes.card}>
           <CardContent>

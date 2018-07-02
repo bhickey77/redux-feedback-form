@@ -29,6 +29,13 @@ class Understanding extends Component {
     }
   }
 
+  onKeyPress = event => {
+    if(event.key == 'Enter'){
+      console.log(`you pressed the enter key`);
+      this.handleSubmit();
+    }
+  }
+
   componentDidMount(){
     console.log(this.props.reduxStore.feedbackReducer.understanding);
     this.setState({
@@ -60,7 +67,7 @@ class Understanding extends Component {
     const { classes } = this.props;
 
     return (
-      <div className="understanding">
+      <div onKeyPress={this.onKeyPress} className="understanding">
       <div>
         <Card className={classes.card}>
           <CardContent>
