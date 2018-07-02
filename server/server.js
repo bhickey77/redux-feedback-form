@@ -40,6 +40,22 @@ app.get('/admin', (req, res) => {
         })
 })
 
+app.delete('/:id', (req, res) => {
+    let id = req.params.id;
+    console.log(`handling / delete id: `, id);
+    const queryText =   `DELETE FROM feedback WHERE id=$1;`;
+    pool.query(queryText, [id])
+        .then(result => {
+            console.log(`successfully deleted from the db: `, result);
+            res.sendStatus(200);
+        })
+        .catch(error => {
+            console.log(`error with the db: `, error);
+            res.sendStatus(500);
+        })
+    
+})
+
 /** ---------- START SERVER ---------- **/
 app.listen(port, function () {
     console.log('Listening on port: ', port);

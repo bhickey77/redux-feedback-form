@@ -12,7 +12,7 @@ class Completed extends Component {
     return (
       <div className="Completed">
         <p>Thank You for Your Feedback!</p>
-        <a href='#/feeling'>Leave New Feedback</a>
+        <a href='#/'>Leave New Feedback</a>
       </div>
     );
   }

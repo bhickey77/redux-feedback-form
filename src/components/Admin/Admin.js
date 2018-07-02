@@ -15,33 +15,62 @@ class Admin extends Component {
     }
   }
 
-  getFeedbackList = () => {
-    axios.get('/admin', (req, res) => {
-      
-    })
+  componentDidMount() {
+    this.getFeedbackList();
   }
 
-  // handleSubmit = (event) => {
-  //   event.preventDefault();
-  //   const action = {type: 'ADD_Admin', payload: parseInt(this.state.Admin, 10)};
-  //   this.props.dispatch(action);
-  //   window.location.href = '#/understanding';
-  // }
+  getFeedbackList = () => {
+    axios.get('/admin')
+      .then(response => {
+        console.log(`back from the server with: `, response);
+        this.setState({
+          feedbackList: response.data.reverse()
+        });
+      })
+      .catch(error => {
+        console.log(`back from the server with: `, error);
+      })
+  }
 
-  // handleChange = (event) => {
-  //   this.setState({
-  //     Admin: event.target.value
-  //   })
-  // }
+  handleDelete = (id) => {
+    axios.delete(`/${id}`)
+      .then(response => {
+        console.log(`back from the server with: `, response);
+        this.getFeedbackList();
+      })
+      .catch(error => {
+        console.log(`error with the server: `, error);
+      })
+  }
   
   render() {
     return (
       <div className="Admin">
-        <p>How are you Admin today?</p>
-        <form onSubmit={this.handleSubmit}>
-          <input type="text" onChange={this.handleChange} />
-          <input type="submit" value="Next"/>
-        </form>
+        <p>Admin</p>
+        <table>
+          <thead>
+            <tr>
+              <td>Feeling</td>
+              <td>Comprehension</td>
+              <td>Support</td>
+              <td>Comments</td>
+              <td>Delete</td>
+            </tr>
+          </thead>
+          <tbody>
+            {this.state.feedbackList.map(item => {
+              return (
+                <tr>
+                  <td>{item.feeling}</td>
+                  <td>{item.understanding}</td>
+                  <td>{item.support}</td>
+                  <td>{item.comments}</td>
+                  <td onClick={() => {this.handleDelete(item.id)}} >Delete</td>
+                </tr>
+              )
+            })}
+          </tbody>
+        </table>
       </div>
     );
   }
