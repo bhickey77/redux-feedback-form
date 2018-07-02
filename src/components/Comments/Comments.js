@@ -2,6 +2,18 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import './Comments.css';
 import { connect } from 'react-redux';
+import { compose } from 'redux';
+import styles from '../../inputStyles';
+
+//======== Material UI ==========
+import { withStyles } from '@material-ui/core/styles';
+import Card from '@material-ui/core/Card';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
+import Icon from '@material-ui/core/Icon/Icon'
+import TextField from '@material-ui/core/TextField';
 
 const mapReduxStateToProps = ({feedbackReducer}) => ({
   feedbackReducer
@@ -43,17 +55,36 @@ class Comments extends Component {
   }
   
   render() {
+    const { classes } = this.props;
+
     return (
-      <div className="comments">
-        <p>Any comments you want to leave?</p>
-        <form onSubmit={this.handleSubmit}>
-          <input type="text" onChange={this.handleChange} />
-          <input type="submit" value="Next"/>
-        </form>
+      <div>
+      <div>
+        <Card className={classes.card}>
+          <CardContent>
+            <TextField
+              id="textarea"
+              label="Any comments you want to leave?"
+              placeholder="Write comments here"
+              multiline
+              value={this.state.comments}
+              onChange={this.handleChange}
+              className={classes.textField}
+              margin="normal"
+            />
+          </CardContent>
+          <CardActions onClick={this.handleSubmit} className={classes.buttonContainer}>
+            <Button size="small">Finish Feedback   <Icon>check_circle</Icon></Button>
+          </CardActions>
+        </Card>
       </div>
+    </div>
     );
   }
 }
 
-export default connect(mapReduxStateToProps)(Comments);
+export default compose(
+  withStyles(styles),
+  connect(mapReduxStateToProps)
+)(Comments);
 
