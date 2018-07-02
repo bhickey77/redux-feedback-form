@@ -15,23 +15,26 @@ const feedbackReducer = (state = {}, action) => {
             }
             break;
         case 'ADD_UNDERSTANDING':
-        return {
-            ...state,
-            understanding: action.payload
-        }
-        break;
+            return {
+                ...state,
+                understanding: action.payload
+            }
+            break;
         case 'ADD_SUPPORT':
-        return {
-            ...state,
-            support: action.payload
-        }
-        break;
+            return {
+                ...state,
+                support: action.payload
+            }
+            break;
         case 'ADD_COMMENTS':
-        return {
-            ...state,
-            comments: action.payload
-        }
-        break;
+            return {
+                ...state,
+                comments: action.payload
+            }
+            break;
+        case 'NEW_FEEDBACK':
+            return {}
+            break;
     }
     return state;
 }

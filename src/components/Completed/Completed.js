@@ -19,6 +19,10 @@ const mapReduxStateToProps = reduxState => ({
 })
 
 class Completed extends Component {
+  handleNewFeedback = () => {
+    this.props.dispatch({type: 'NEW_FEEDBACK'})
+  }
+
   render() {
     const { classes } = this.props;
 
@@ -30,7 +34,7 @@ class Completed extends Component {
           </Typography>
        </CardContent>
        <CardActions >
-        <Button variant="contained" href="#/" className={classes.buttonNewFeedback}>
+        <Button onClick={this.handleNewFeedback} variant="contained" href="#/" className={classes.buttonNewFeedback}>
           Leave New Feedback
         </Button>
        </CardActions>

@@ -18,9 +18,9 @@ import Radio from '@material-ui/core/Radio';
 import RadioButtonUncheckedIcon from '@material-ui/icons/RadioButtonUnchecked';
 import RadioButtonCheckedIcon from '@material-ui/icons/RadioButtonChecked';
 
-const mapReduxStateToProps = ({reduxStore}) => ({
+const mapReduxStateToProps = (reduxStore) => ({
   reduxStore
-})
+});
 
 class Understanding extends Component {
   constructor(props){
@@ -30,11 +30,25 @@ class Understanding extends Component {
     }
   }
 
+  componentDidMount(){
+    console.log(this.props.reduxStore.feedbackReducer.understanding);
+    this.setState({
+      selectedValue: this.props.reduxStore.feedbackReducer.understanding
+    })
+  }
+
   handleSubmit = (event) => {
-    event.preventDefault();
     const action = {type: 'ADD_UNDERSTANDING', payload: parseInt(this.state.selectedValue, 10)};
     this.props.dispatch(action);
     window.location.href = '#/support';
+    console.log(this.props);
+
+  }
+
+  handleBack = (event) => {
+    const action = {type: 'ADD_UNDERSTANDING', payload: this.state.selectedValue};
+    this.props.dispatch(action);
+    window.location.href = '#/';
   }
 
   handleChange = (event) => {
@@ -57,7 +71,7 @@ class Understanding extends Component {
             <div className={classes.radioContainer}>
               <p className={classes.buttonHint}>I'm totally lost<Icon>swap_calls</Icon></p>
               <Radio
-                checked={this.state.selectedValue === '1'}
+                checked={this.state.selectedValue == '1'}
                 onChange={this.handleChange}
                 value="1"
                 name="radio-button-demo"
@@ -65,7 +79,7 @@ class Understanding extends Component {
                 aria-label="1"
               />
               <Radio
-                checked={this.state.selectedValue === '2'}
+                checked={this.state.selectedValue == '2'}
                 onChange={this.handleChange}
                 value="2"
                 name="radio-button-demo"
@@ -73,7 +87,7 @@ class Understanding extends Component {
                 aria-label="2"
               />
               <Radio
-                checked={this.state.selectedValue === '3'}
+                checked={this.state.selectedValue == '3'}
                 onChange={this.handleChange}
                 value="3"
                 name="radio-button-demo"
@@ -85,7 +99,7 @@ class Understanding extends Component {
                 }}
               />
               <Radio
-                checked={this.state.selectedValue === '4'}
+                checked={this.state.selectedValue == '4'}
                 onChange={this.handleChange}
                 value="4"
                 color="default"
@@ -93,7 +107,7 @@ class Understanding extends Component {
                 aria-label="4"
               />
               <Radio
-                checked={this.state.selectedValue === '5'}
+                checked={this.state.selectedValue == '5'}
                 onChange={this.handleChange}
                 value="5"
                 color="default"
@@ -106,8 +120,9 @@ class Understanding extends Component {
               <p className={classes.buttonHint}>I've got this!<Icon>assignment_turned_in</Icon></p>
             </div>
           </CardContent>
-          <CardActions onClick={this.handleSubmit} className={classes.buttonContainer}>
-            <Button size="small">Next Item <Icon>trending_flat</Icon></Button>
+          <CardActions className={classes.buttonContainer}>
+            <Button onClick={this.handleBack} size="small"><Icon>arrow_back</Icon>  Previous Item</Button>
+            <Button onClick={this.handleSubmit} size="small">Next Item <Icon>arrow_forward</Icon></Button>
           </CardActions>
         </Card>
       </div>

@@ -15,8 +15,8 @@ import Typography from '@material-ui/core/Typography';
 import Icon from '@material-ui/core/Icon/Icon'
 import TextField from '@material-ui/core/TextField';
 
-const mapReduxStateToProps = ({feedbackReducer}) => ({
-  feedbackReducer
+const mapReduxStateToProps = (reduxStore) => ({
+  reduxStore
 })
 
 class Comments extends Component {
@@ -27,15 +27,28 @@ class Comments extends Component {
     }
   }
 
+  componentDidMount(){
+    console.log(this.props.reduxStore.feedbackReducer.comments);
+    this.setState({
+      comments: this.props.reduxStore.feedbackReducer.comments
+    })
+  }
+
+  handleBack = (event) => {
+    const action = {type: 'ADD_COMMENTS', payload: this.state.comments};
+    this.props.dispatch(action);
+    window.location.href = '#/support';
+  }
+
   handleSubmit = async (event) => {
     event.preventDefault();
     const action = {type: 'ADD_COMMENTS', payload: this.state.comments};
     await this.props.dispatch(action);
     let objectToSend = {
-      feeling: this.props.feedbackReducer.feeling,
-      understanding: this.props.feedbackReducer.understanding,
-      support: this.props.feedbackReducer.support,
-      comments: this.props.feedbackReducer.comments,
+      feeling: this.props.reduxStore.feedbackReducer.feeling,
+      understanding: this.props.reduxStore.feedbackReducer.understanding,
+      support: this.props.reduxStore.feedbackReducer.support,
+      comments: this.props.reduxStore.feedbackReducer.comments,
     }
     console.log(objectToSend);
     axios.post('/', objectToSend)
@@ -73,8 +86,9 @@ class Comments extends Component {
               margin="normal"
             />
           </CardContent>
-          <CardActions onClick={this.handleSubmit} className={classes.buttonContainer}>
-            <Button size="small">Finish Feedback   <Icon>check_circle</Icon></Button>
+          <CardActions className={classes.buttonContainer}>
+            <Button onClick={this.handleBack} size="small"><Icon>arrow_back</Icon>  Previous Item</Button>
+            <Button onClick={this.handleSubmit} size="small">Finish Feedback   <Icon>check_circle</Icon></Button>
           </CardActions>
         </Card>
       </div>

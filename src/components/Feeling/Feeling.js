@@ -19,7 +19,7 @@ import RadioButtonUncheckedIcon from '@material-ui/icons/RadioButtonUnchecked';
 import RadioButtonCheckedIcon from '@material-ui/icons/RadioButtonChecked';
 
 
-const mapReduxStateToProps = ({reduxStore}) => ({
+const mapReduxStateToProps = (reduxStore) => ({
   reduxStore
 })
 
@@ -29,6 +29,13 @@ class Feeling extends Component {
     this.state = {
       selectedValue: ''
     }
+  }
+
+  componentDidMount(){
+    console.log(this.props.reduxStore.feedbackReducer.feeling);
+    this.setState({
+      selectedValue: this.props.reduxStore.feedbackReducer.feeling
+    })
   }
 
   handleSubmit = (event) => {
@@ -58,7 +65,7 @@ class Feeling extends Component {
               <div className={classes.radioContainer}>
                 <p className={classes.buttonHint}>I'm very stressed<Icon>sentiment_very_dissatisfied</Icon></p>
                 <Radio
-                  checked={this.state.selectedValue === '1'}
+                  checked={this.state.selectedValue == '1'}
                   onChange={this.handleChange}
                   value="1"
                   name="radio-button-demo"
@@ -66,7 +73,7 @@ class Feeling extends Component {
                   aria-label="1"
                 />
                 <Radio
-                  checked={this.state.selectedValue === '2'}
+                  checked={this.state.selectedValue == '2'}
                   onChange={this.handleChange}
                   value="2"
                   name="radio-button-demo"
@@ -74,7 +81,7 @@ class Feeling extends Component {
                   aria-label="2"
                 />
                 <Radio
-                  checked={this.state.selectedValue === '3'}
+                  checked={this.state.selectedValue == '3'}
                   onChange={this.handleChange}
                   value="3"
                   name="radio-button-demo"
@@ -86,7 +93,7 @@ class Feeling extends Component {
                   }}
                 />
                 <Radio
-                  checked={this.state.selectedValue === '4'}
+                  checked={this.state.selectedValue == '4'}
                   onChange={this.handleChange}
                   value="4"
                   color="default"
@@ -94,7 +101,7 @@ class Feeling extends Component {
                   aria-label="4"
                 />
                 <Radio
-                  checked={this.state.selectedValue === '5'}
+                  checked={this.state.selectedValue == '5'}
                   onChange={this.handleChange}
                   value="5"
                   color="default"
